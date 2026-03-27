@@ -1,0 +1,173 @@
+---
+title: "Getting started with foundry10"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with foundry10}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 4
+)
+library(foundry10)
+library(ggplot2)
+```
+
+## Setup
+
+Install from GitHub (once) and load as normal:
+
+```r
+# install.packages("remotes")
+remotes::install_github("kgweisman/foundry10")
+library(foundry10)
+library(ggplot2)
+```
+
+The only required dependency is **ggplot2**. Install **systemfonts** for
+automatic Helvetica Neue font detection:
+
+```r
+install.packages("systemfonts")
+```
+
+---
+
+## The main theme
+
+Add `theme_foundry10()` to any ggplot. The typical pattern is:
+
+```r
+ggplot(data, aes(x, y, color = group)) +
+  geom_point() +
+  scale_color_foundry10_d() +
+  theme_foundry10() +
+  labs(title = "Title", subtitle = "Subtitle", caption = "Source: ...")
+```
+
+`theme_foundry10()` accepts three arguments:
+
+| Argument | Default | Options |
+|---|---|---|
+| `base_size` | `12` | Any number (pt). Use 14-16 for slides. |
+| `grid` | `TRUE` | `FALSE` removes horizontal grid lines. |
+| `strip_color` | `"white"` | `"orange"`, `"cyan"`, `"black"`, `"white"` |
+
+Quick preview:
+
+```{r preview}
+preview_theme_foundry10()
+```
+
+---
+
+## Choosing a color scale
+
+| Data type | Function | Notes |
+|---|---|---|
+| Categorical -- no valence | `scale_fill_foundry10_d()` | Up to 6 categories |
+| Continuous -- negative/concerning | `scale_fill_foundry10_seq()` | Orange ramp (default) |
+| Continuous -- positive/favorable | `scale_fill_foundry10_seq(tint = "cyan")` | Cyan ramp |
+| Continuous diverging | `scale_fill_foundry10_div()` | Orange -> gray -> cyan |
+| Ordered categories, 2-4 levels | `scale_fill_foundry10_seq_d(n)` | Fixed brand tints |
+| Likert / ordered with midpoint, 2-9 levels | `scale_fill_foundry10_div_d(n)` | Orange -> gray -> cyan |
+
+All scale functions have `fill` and `color` variants and `scale_colour_`
+aliases. Most accept `direction = -1` to reverse the ramp.
+
+### Discrete (qualitative)
+
+```{r discrete}
+mpg6 <- mpg[mpg$class != "minivan", ]
+ggplot(mpg6, aes(displ, hwy, color = class)) +
+  geom_point(size = 2, alpha = 0.8) +
+  scale_color_foundry10_d() +
+  theme_foundry10() +
+  labs(title    = "Engine displacement vs highway MPG",
+       subtitle = "By vehicle class",
+       x = "Displacement (L)", y = "Highway MPG")
+```
+
+### Sequential
+
+```{r sequential}
+ggplot(faithfuld, aes(waiting, eruptions, fill = density)) +
+  geom_tile() +
+  scale_fill_foundry10_seq() +
+  theme_foundry10(grid = FALSE) +
+  labs(title = "Old Faithful eruption density") +
+  guides(fill = guide_colorbar(barwidth = 20))
+```
+
+### Diverging (continuous)
+
+```{r diverging}
+set.seed(42)
+regions <- c("Northeast", "Southeast", "Midwest", "West", "Southwest")
+df_div  <- expand.grid(region = regions,
+                       month  = factor(month.abb, levels = month.abb))
+df_div$variance <- round(rnorm(nrow(df_div), mean = 0, sd = 12), 1)
+
+ggplot(df_div, aes(x = month, y = region, fill = variance)) +
+  geom_tile(color = "white", linewidth = 0.4) +
+  scale_fill_foundry10_div(limits = c(-30, 30),
+                           name   = "vs. prior year (%)") +
+  theme_foundry10(grid = FALSE) +
+  labs(title    = "Regional sales variance by month",
+       subtitle = "Percentage change vs. prior year",
+       x = NULL, y = NULL) +
+  guides(fill = guide_colorbar(barwidth = 15))
+```
+
+### Diverging discrete (Likert)
+
+```{r likert}
+set.seed(1)
+df_likert <- data.frame(
+  response = factor(
+    sample(c("Strongly disagree", "Disagree", "Neutral",
+             "Agree", "Strongly agree"), 200, replace = TRUE),
+    levels = c("Strongly disagree", "Disagree", "Neutral",
+               "Agree", "Strongly agree")
+  )
+)
+ggplot(df_likert, aes(x = response, fill = response)) +
+  geom_bar() +
+  scale_fill_foundry10_div_d(n = 5) +
+  theme_foundry10() +
+  labs(title = "Survey responses", x = NULL, y = "Count") +
+  theme(legend.position = "none")
+```
+
+---
+
+## Data viz color semantics
+
+Per the **foundry10 Visual Style Guide**:
+
+- **Orange** = negative, bad, concerning, or below-target values
+- **Cyan** = positive, good, favorable, or above-target values
+- **Gray** = neutral, unimportant, or background elements
+
+> The qualitative palette (`scale_fill_foundry10_d`) is for categorical data
+> with no positive/negative meaning. Avoid assigning orange (slot 1) to a
+> "yes", "agree", or otherwise positive category.
+
+---
+
+## Utility functions
+
+```r
+foundry10_color("orange_foundry10")    # "#D14E1D"
+foundry10_color("cyan_cool")           # "#007079"
+
+foundry10_palette("primary")           # named vector of 4 primary colors
+foundry10_palette("all")               # all brand colors
+
+preview_foundry10_palette("secondary") # renders a color swatch
+```

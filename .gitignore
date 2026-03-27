@@ -1,0 +1,21 @@
+# R package build artifacts
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# Package build
+/doc/
+/Meta/
+/inst/doc/
+
+# pkgdown site
+/docs/
+
+# R CMD check
+/*.Rcheck/
+*.tar.gz
+
+# devtools
+.DS_Store

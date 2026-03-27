@@ -1,0 +1,27 @@
+Package: foundry10
+Title: ggplot2 Theme and Color Palettes for foundry10
+Version: 0.1.0
+Authors@R: 
+    person("Kara", "Weisman",
+           role = c("aut", "cre"),
+           email = "kara@foundry10.org")
+Description: Provides a branded ggplot2 theme and a full suite of color
+    scales for foundry10 data visualizations.
+License: MIT + file LICENSE
+URL: https://github.com/kgweisman/foundry10
+BugReports: https://github.com/kgweisman/foundry10/issues
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Depends:
+    R (>= 4.1.0)
+Imports:
+    ggplot2 (>= 3.4.0),
+    rlang
+Suggests:
+    systemfonts,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
