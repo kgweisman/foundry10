@@ -1,6 +1,6 @@
 # foundry10
 
-[![R-CMD-check](https://github.com/yourusername/foundry10/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/yourusername/foundry10/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/kgweisman/foundry10/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kgweisman/foundry10/actions/workflows/R-CMD-check.yaml)
 
 A branded ggplot2 theme and color palette suite for [foundry10](https://www.foundry10.org) data visualizations.
 
