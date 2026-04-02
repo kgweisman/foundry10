@@ -49,7 +49,7 @@ Per the foundry10 Visual Style Guide: **orange = negative/bad**, **cyan = positi
 theme_foundry10(
   base_size   = 12,         # font size in pt; use 14-16 for slides
   grid        = TRUE,       # set FALSE for heatmaps
-  strip_color = "white"     # facet strip: "white", "orange", "cyan", "black"
+  strip_fill = "white"      # facet strip: "white", "orange", "cyan", "black"
 )
 ```
 

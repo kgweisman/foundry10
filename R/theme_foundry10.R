@@ -592,7 +592,7 @@ scale_colour_foundry10_div_d <- scale_color_foundry10_div_d
 #'   available, then Arial, then `"sans"`.
 #' @param grid Logical. Show subtle horizontal grid lines (default `TRUE`).
 #'   Set `FALSE` for heatmaps and tile charts.
-#' @param strip_color Character. Facet strip background: `"white"` (default),
+#' @param strip_fill Character. Facet strip background: `"white"` (default),
 #'   `"orange"`, `"cyan"`, or `"black"`. Text is automatically white or black
 #'   for contrast.
 #' @return A ggplot2 theme object.
@@ -612,16 +612,16 @@ scale_colour_foundry10_div_d <- scale_color_foundry10_div_d
 theme_foundry10 <- function(base_size   = 12,
                             base_family = .foundry10_font(),
                             grid        = TRUE,
-                            strip_color = "white") {
+                            strip_fill  = "white") {
 
-  strip_color      <- match.arg(strip_color,
+  strip_fill      <- match.arg(strip_fill,
                                 c("orange", "cyan", "black", "white"))
-  strip_fill       <- switch(strip_color,
-                             orange = "#D14E1D",
-                             cyan   = "#01646F",
-                             black  = "#111111",
-                             white  = "#FFFFFF")
-  strip_text_color <- if (strip_color == "white") "#111111" else "#FFFFFF"
+  strip_fill_hex  <- switch(strip_fill,
+                            orange = "#D14E1D",
+                            cyan   = "#01646F",
+                            black  = "#111111",
+                            white  = "#FFFFFF")
+  strip_text_color <- if (strip_fill == "white") "#111111" else "#FFFFFF"
 
   half  <- base_size / 2
   third <- base_size / 3
@@ -706,8 +706,8 @@ theme_foundry10 <- function(base_size   = 12,
       family = base_family,
       size   = base_size * 0.85, color = "#575857"),
 
-    # Facet strips: strip_color controls fill; text contrast auto-selected
-    strip.background = ggplot2::element_rect(fill = strip_fill,
+    # Facet strips: strip_fill controls fill; text contrast auto-selected
+    strip.background = ggplot2::element_rect(fill = strip_fill_hex,
                                              color = NA),
     strip.text = ggplot2::element_text(
       family = base_family, face = "bold",
@@ -730,7 +730,7 @@ theme_foundry10 <- function(base_size   = 12,
 #' grid lines, axis labels, and the discrete color palette.
 #'
 #' @param base_size Numeric. Passed to [theme_foundry10()] (default 12).
-#' @param strip_color Character. Passed to [theme_foundry10()]: `"white"`
+#' @param strip_fill Character. Passed to [theme_foundry10()]: `"white"`
 #'   (default), `"orange"`, `"cyan"`, or `"black"`.
 #' @param grid Logical. Passed to [theme_foundry10()] (default `TRUE`).
 #' @return A ggplot2 object.
@@ -738,11 +738,11 @@ theme_foundry10 <- function(base_size   = 12,
 #' @examples
 #' \dontrun{
 #' preview_theme_foundry10()
-#' preview_theme_foundry10(strip_color = "orange")
+#' preview_theme_foundry10(strip_fill = "orange")
 #' preview_theme_foundry10(base_size = 14, grid = FALSE)
 #' }
 preview_theme_foundry10 <- function(base_size   = 12,
-                                    strip_color = "white",
+                                    strip_fill  = "white",
                                     grid        = TRUE) {
   mpg6 <- ggplot2::mpg[ggplot2::mpg$class != "minivan", ]
   mpg6$drv_label <- factor(
@@ -756,7 +756,7 @@ preview_theme_foundry10 <- function(base_size   = 12,
     ggplot2::facet_wrap(~ .data$drv_label) +
     scale_color_foundry10_d() +
     theme_foundry10(base_size   = base_size,
-                    strip_color = strip_color,
+                    strip_fill  = strip_fill,
                     grid        = grid) +
     ggplot2::labs(
       title    = "Engine displacement vs. highway MPG",

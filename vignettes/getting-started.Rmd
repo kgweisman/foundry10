@@ -56,7 +56,7 @@ ggplot(data, aes(x, y, color = group)) +
 |---|---|---|
 | `base_size` | `12` | Any number (pt). Use 14-16 for slides. |
 | `grid` | `TRUE` | `FALSE` removes horizontal grid lines. |
-| `strip_color` | `"white"` | `"orange"`, `"cyan"`, `"black"`, `"white"` |
+| `strip_fill` | `"white"` | `"orange"`, `"cyan"`, `"black"`, `"white"` |
 
 Quick preview:
 
