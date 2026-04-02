@@ -4,12 +4,12 @@
 \alias{preview_theme_foundry10}
 \title{Preview the foundry10 theme with a representative sample plot}
 \usage{
-preview_theme_foundry10(base_size = 12, strip_color = "white", grid = TRUE)
+preview_theme_foundry10(base_size = 12, strip_fill = "white", grid = TRUE)
 }
 \arguments{
 \item{base_size}{Numeric. Passed to \code{\link[=theme_foundry10]{theme_foundry10()}} (default 12).}
 
-\item{strip_color}{Character. Passed to \code{\link[=theme_foundry10]{theme_foundry10()}}: \code{"white"}
+\item{strip_fill}{Character. Passed to \code{\link[=theme_foundry10]{theme_foundry10()}}: \code{"white"}
 (default), \code{"orange"}, \code{"cyan"}, or \code{"black"}.}
 
 \item{grid}{Logical. Passed to \code{\link[=theme_foundry10]{theme_foundry10()}} (default \code{TRUE}).}
@@ -25,7 +25,7 @@ grid lines, axis labels, and the discrete color palette.
 \examples{
 \dontrun{
 preview_theme_foundry10()
-preview_theme_foundry10(strip_color = "orange")
+preview_theme_foundry10(strip_fill = "orange")
 preview_theme_foundry10(base_size = 14, grid = FALSE)
 }
 }

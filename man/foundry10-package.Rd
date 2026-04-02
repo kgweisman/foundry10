@@ -54,13 +54,13 @@ where no color carries directional meaning.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/yourusername/foundry10}
-  \item Report bugs at \url{https://github.com/yourusername/foundry10/issues}
+  \item \url{https://github.com/kgweisman/foundry10}
+  \item Report bugs at \url{https://github.com/kgweisman/foundry10/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Kara Weisman \email{your-email@foundry10.org}
+\strong{Maintainer}: Kara Weisman \email{kara@foundry10.org}
 
 }
 \keyword{internal}

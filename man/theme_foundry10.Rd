@@ -8,7 +8,7 @@ theme_foundry10(
   base_size = 12,
   base_family = .foundry10_font(),
   grid = TRUE,
-  strip_color = "white"
+  strip_fill = "white"
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ available, then Arial, then \code{"sans"}.}
 \item{grid}{Logical. Show subtle horizontal grid lines (default \code{TRUE}).
 Set \code{FALSE} for heatmaps and tile charts.}
 
-\item{strip_color}{Character. Facet strip background: \code{"white"} (default),
+\item{strip_fill}{Character. Facet strip background: \code{"white"} (default),
 \code{"orange"}, \code{"cyan"}, or \code{"black"}. Text is automatically white or black
 for contrast.}
 }
