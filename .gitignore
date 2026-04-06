@@ -10,9 +10,6 @@
 /Meta/
 /inst/doc/
 
-# pkgdown site
-/docs/
-
 # R CMD check
 /*.Rcheck/
 *.tar.gz

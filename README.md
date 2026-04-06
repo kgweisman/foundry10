@@ -27,7 +27,7 @@ ggplot(mpg6, aes(displ, hwy, color = class)) +
        x = "Displacement (L)", y = "Highway MPG")
 ```
 
-See `vignette("getting-started", package = "foundry10")` for full documentation.
+See `vignette("getting-started", package = "foundry10")` for a quickstart guide, or the [full reference guide](docs/foundry10_ref_guide_2026-04-06.pdf) for complete documentation of all functions and color palettes.
 
 ## Color scales
 
